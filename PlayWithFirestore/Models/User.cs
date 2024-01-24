@@ -5,6 +5,8 @@ namespace PlayWithFirestore.Models
     [FirestoreData]
     public class User
     {
+        [FirestoreDocumentId]
+        public string Id { get; set; }
         [FirestoreProperty]
         public string First { get; set; }
         [FirestoreProperty]
