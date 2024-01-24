@@ -15,9 +15,15 @@ Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
 }
+
+app.UseSwagger();
+
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("v1/swagger.json", "Test Play With FireStore V1");
+});
 
 app.UseHttpsRedirection();
 
