@@ -50,15 +50,24 @@ namespace PlayWithFirestore.Controllers
                 Born = 1912
             };
             /*var inforAdding = _mapper.Map<Dictionary<string, object>>(user2);*/
-            DocumentReference docRef = await _db.Collection("users").AddAsync(user2);
+            await _db.Collection("users").AddAsync(user2);
+
+            User user3 = new()
+            {
+                First = "Dat",
+                Middle = "Thanh",
+                Last = "Tran",
+                Born = 2001
+            };
+            await _db.Collection("users").AddAsync(user3);
             return Ok();
         }
         [HttpGet("get-info")]
-        public async Task<ActionResult<List<User>>> GetIO()
+        public async Task<ActionResult<User>> GetIO()
         {
             CollectionReference usersRef = _db.Collection("users");
             QuerySnapshot snapshots = await usersRef.GetSnapshotAsync();
-            List<User> usRe = new();
+            /*List<User> usRe = new();
 
             foreach (var document in snapshots.Documents)
             {
@@ -76,6 +85,12 @@ namespace PlayWithFirestore.Controllers
 
                 // Add the user to the list
                 usRe.Add(user);
+            }*/
+            List<User> usRe = new();
+            var listSnap = snapshots.ToList();
+            foreach (var item in listSnap)
+            {
+                usRe.Add(item.ConvertTo<User>());
             }
             return Ok(usRe);
         }
