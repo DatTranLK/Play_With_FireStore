@@ -6,7 +6,7 @@ namespace PlayWithFirestore.Models
     public class City
     {
         [FirestoreDocumentId]
-        public string Id { get; set; }
+        public string? Id { get; set; }
         [FirestoreProperty]
         public string Name { get; set; }
         [FirestoreProperty]
