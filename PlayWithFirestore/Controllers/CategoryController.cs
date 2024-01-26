@@ -54,5 +54,16 @@ namespace PlayWithFirestore.Controllers
             await categoryRef.UpdateAsync(updates);
             return NoContent();
         }
+        [HttpGet("category/{id}")]
+        public async Task<ActionResult<Category>> GetCategoryById(string id)
+        {
+            var snapshot = await _db.Collection("categories").Document(id).GetSnapshotAsync();
+            if(snapshot.Exists)
+            {
+                return Ok(snapshot.ConvertTo<Category>());
+            }
+            return NotFound();
+
+        }
     }
 }
