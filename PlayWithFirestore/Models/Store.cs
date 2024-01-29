@@ -16,8 +16,10 @@ namespace PlayWithFirestore.Models
         [FirestoreProperty]
         public string Address { get; set; }
         [FirestoreProperty]
-        public TimeSpan StartTime { get; set; }
+        public string MapLink { get; set; }
         [FirestoreProperty]
-        public TimeSpan EndTime { get; set; }
+        public string StartTime { get; set; }
+        [FirestoreProperty]
+        public string EndTime { get; set; }
     }
 }

@@ -71,5 +71,25 @@ namespace PlayWithFirestore.Controllers
             return NotFound();
 
         }
+        [HttpGet("/provinces/province/{provinceId}/cities")]
+        public async Task<ActionResult<List<City>>> GetCityByProvinceId(string provinceId)
+        {
+            List<City> result = new();
+            CollectionReference citiesRef = _db.Collection("cities");
+            QuerySnapshot snapshots = await citiesRef.GetSnapshotAsync();
+            if (snapshots.Count() > 0)
+            {
+                foreach (var snapshot in snapshots)
+                {
+                    var x = snapshot.ConvertTo<City>();
+                    if (x.ProvinceId == provinceId)
+                    {
+                        result.Add(x);
+                    }
+                }
+                return Ok(result);
+            }
+            return NotFound();
+        }
     }
 }
